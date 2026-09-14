@@ -1,0 +1,24 @@
+module fa_1bit(a, b, cin, sum, cout);
+
+input a, b, cin;
+output sum, cout;
+
+wire axorb;
+wire ab;
+wire acin;
+wire bcin;
+wire carry_temp;
+
+// sum = a XOR b XOR cin
+xor xor1(axorb, a, b);
+xor xor2(sum, axorb, cin);
+
+// cout = ab + a*cin + b*cin
+and and1(ab, a, b);
+and and2(acin, a, cin);
+and and3(bcin, b, cin);
+
+or or1(carry_temp, ab, acin);
+or or2(cout, carry_temp, bcin);
+
+endmodule

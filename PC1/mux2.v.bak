@@ -1,0 +1,11 @@
+module mux2(in1, in2, sel, out);
+input in1;
+input in2;
+input sel;
+output out;
+wire not_sel,choose1,choose2;
+not n0(not_sel, sel);
+and a0(choose1, in1, not_sel);
+and a1(choose2, in2, sel);
+or o0(out, choose1, choose2);
+endmodule

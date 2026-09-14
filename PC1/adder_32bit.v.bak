@@ -1,0 +1,44 @@
+module adder_32bit(a, b, cin, sum, cout);
+input [31:0] a;
+input [31:0] b;
+input cin;
+
+output [31:0] sum;
+output cout;
+
+//block0
+wire [3:0] sum1_0;
+wire [3:0] sum1_1;
+
+wire carry1_0;
+wire carry1_1;
+
+wire c8;
+
+adder_4bit rca10(
+    a[7:4],
+    b[7:4],
+    1'b0,
+    sum1_0,
+    carry1_0
+);
+
+adder_4bit rca11(
+    a[7:4],
+    b[7:4],
+    1'b1,
+    sum1_1,
+    carry1_1
+);
+
+mux2 m10(sum1_0[0], sum1_1[0], c4, sum[4]);
+mux2 m11(sum1_0[1], sum1_1[1], c4, sum[5]);
+mux2 m12(sum1_0[2], sum1_1[2], c4, sum[6]);
+mux2 m13(sum1_0[3], sum1_1[3], c4, sum[7]);
+mux2 mc1(carry1_0, carry1_1, c4, c8);
+
+
+
+
+
+endmodule
